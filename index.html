@@ -21,7 +21,15 @@
       <div class="row mt-5">
         <h1 class="w-100 text-center mt-5 pt-5">Dollar Converter</h1>
         <div class="row col-md-4 mx-auto my-5">
-          <input type="number" id="input-amount" value="" class="form-control w-75 mx-auto text-center mb-2" placeholder="Enter US Dollar Amount">
+
+          <div class="input-group mb-3 w-75 mx-auto">            
+            <input type="number" id="input-amount" value="" class="form-control  text-center" placeholder="Enter Amount">
+
+            <div class="input-group-append">
+              <span class="input-group-text">US Dollars</span>
+            </div>
+          </div>
+         
           <h2 class="w-100 text-center my-2">Choose Conversion</h2>
           <select class="form-control w-75 mx-auto text-center my-2" id="output-type">
             <option value="">Choose a currency</option>
@@ -30,7 +38,7 @@
           <input type="text" id="output-amount" value="" class="form-control w-75 mx-auto my-2 text-center" placeholder="Result">
           <button type="button" id="reset" class="btn form-control w-75 mx-auto btn-outline-dark my-2">Clear</button>
         </div>
-        <h3 class="w-100 text-center fixed-bottom mb-5" id="copyright">&copy;2020 &nbsp;| &nbsp; Casey Pitman</h3>
+        <h3 class="w-100 text-center fixed-bottom mb-5" id="copyright">&copy;2020 &nbsp; | &nbsp; Casey Pitman</h3>
       </div>
     </div>
     
