@@ -1,6 +1,9 @@
 body{
-    background-image:url("../img/background.jpg") ;
-    background-position:center;
+    background: linear-gradient(
+        rgba(133, 187, 101, 0.50), 
+        rgba(133, 187, 101, 0.50)
+      ),url("../img/money-map-bg.jpg") ;
+    background-position:left;
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'EB Garamond', serif;
@@ -10,29 +13,15 @@ body{
 
 h1{
     font-size:42px;
-}
-
-h2{
-    font-size:24px;
-}
-
-h3{
-    font-size:20px;
-}
-
-#copyright{
-    color:white;
+    color:whitesmoke;
     font-weight:600;
 }
 
+h2{
+    color:whitesmoke;
+    font-size:24px;
+}
 
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) { 
- 
-    body{
-        background-position:left;
-    }
+#copyright{
+    font-weight:600;
 }
