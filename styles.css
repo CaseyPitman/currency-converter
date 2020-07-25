@@ -4,7 +4,6 @@
     padding:0px;
     font-size: 10px;
     font-family: 'EB Garamond', serif;
-    
 }
 
 body{
@@ -63,10 +62,6 @@ body{
 #convert-btn:hover {
     background-color: rgb(47, 79, 68);
     font-weight: 600;
-}
-
-#output {
-    visibility: hidden;
 }
 
 #copyright {
