@@ -1,5 +1,14 @@
+//Currency Converter App
 
-$(document).ready(function(){
+
+
+
+
+
+
+
+/* $(document).ready(function(){
+
     //Converts from one currency to another
     function convert(){
         let inputCurrency=$("#input-currency").val(); 
@@ -25,4 +34,4 @@ $(document).ready(function(){
     }
     //Activates the conversion
     $("#convert-btn").on("click", convert);
-});
+}); */
