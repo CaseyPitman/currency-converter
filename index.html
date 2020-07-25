@@ -12,93 +12,70 @@
 </head>
 
 <body>
-  <main id="container">
+  <main id="wrapper">
 
     <h1 id="headline">Currency Converter</h1>
-    <input type="number" name="inputAmount" id="inputAmount" placeholder = "Enter Amount">
 
-    <!-- Convert from currency -->
-    <select name="input-currency" id="input-currency">
-      <option value="selected">Convert from:</option>
-      <option value="AUD">Austrailian Dollars</option> 
-      <option value="GBP">British Pounds</option>
-      <option value="CAD">Canadian Dollars</option>
-      <option value="CNY">Chinese Yuan</option>
-      <option value="DKK">Danish Kroner</option>
-      <option value="EUR">Euros</option>
-      <option value="HKD">Hong Kong Dollars</option>
-      <option value="ILS">Israeli New Shekels</option>
-      <option value="INR">Indian Rupees</option>
-      <option value="ISK">Icelandic Krónur </option>
-      <option value="JPY">Japanese Yen</option>
-      <option value="MXN">Mexican Pesos</option>
-      <option value="NZD">New Zealand Dollars</option>
-      <option value="PLN">Polish Złotys</option>
-      <option value="RUB">Russian Rubles</option>
-      <option value="CHF">Swiss Francs</option>
-      <option value="TRY">Turkish Liras</option>
-      <option value="USD">US Dollars</option>
-    </select>
+    <section id="container">
+      <input type="number" name="inputAmount" id="inputAmount" class= "field" placeholder = "Enter Amount">
 
-    <!-- Convert to currency -->
-    <select name="input-currency" id="input-currency">
-      <option value="selected">Convert from:</option>
-      <option value="AUD">Austrailian Dollars</option> 
-      <option value="GBP">British Pounds</option>
-      <option value="CAD">Canadian Dollars</option>
-      <option value="CNY">Chinese Yuan</option>
-      <option value="DKK">Danish Kroner</option>
-      <option value="EUR">Euros</option>
-      <option value="HKD">Hong Kong Dollars</option>
-      <option value="ILS">Israeli New Shekels</option>
-      <option value="INR">Indian Rupees</option>
-      <option value="ISK">Icelandic Krónur </option>
-      <option value="JPY">Japanese Yen</option>
-      <option value="MXN">Mexican Pesos</option>
-      <option value="NZD">New Zealand Dollars</option>
-      <option value="PLN">Polish Złotys</option>
-      <option value="RUB">Russian Rubles</option>
-      <option value="CHF">Swiss Francs</option>
-      <option value="TRY">Turkish Liras</option>
-      <option value="USD">US Dollars</option>
-    </select>
+      <!-- Convert from currency -->
+      <select name="input-currency" id="input-currency" class = "field">
+        <option value="selected">Convert from:</option>
+        <option value="AUD">Austrailian Dollars</option> 
+        <option value="GBP">British Pounds</option>
+        <option value="CAD">Canadian Dollars</option>
+        <option value="CNY">Chinese Yuan</option>
+        <option value="DKK">Danish Kroner</option>
+        <option value="EUR">Euros</option>
+        <option value="HKD">Hong Kong Dollars</option>
+        <option value="ILS">Israeli New Shekels</option>
+        <option value="INR">Indian Rupees</option>
+        <option value="ISK">Icelandic Krónur </option>
+        <option value="JPY">Japanese Yen</option>
+        <option value="MXN">Mexican Pesos</option>
+        <option value="NZD">New Zealand Dollars</option>
+        <option value="PLN">Polish Złotys</option>
+        <option value="RUB">Russian Rubles</option>
+        <option value="CHF">Swiss Francs</option>
+        <option value="TRY">Turkish Liras</option>
+        <option value="USD">US Dollars</option>
+      </select>
 
-    <button id = "convert-btn">Convert</button>
+      <!-- Convert to currency -->
+      <select name="output-currency" id="output-currency" class = "field">
+        <option value="selected">Convert to:</option>
+        <option value="AUD">Austrailian Dollars</option> 
+        <option value="GBP">British Pounds</option>
+        <option value="CAD">Canadian Dollars</option>
+        <option value="CNY">Chinese Yuan</option>
+        <option value="DKK">Danish Kroner</option>
+        <option value="EUR">Euros</option>
+        <option value="HKD">Hong Kong Dollars</option>
+        <option value="ILS">Israeli New Shekels</option>
+        <option value="INR">Indian Rupees</option>
+        <option value="ISK">Icelandic Krónur </option>
+        <option value="JPY">Japanese Yen</option>
+        <option value="MXN">Mexican Pesos</option>
+        <option value="NZD">New Zealand Dollars</option>
+        <option value="PLN">Polish Złotys</option>
+        <option value="RUB">Russian Rubles</option>
+        <option value="CHF">Swiss Francs</option>
+        <option value="TRY">Turkish Liras</option>
+        <option value="USD">US Dollars</option>
+      </select>
 
-    <!-- Result field -->
+      <button id = "convert-btn">Convert</button>
 
-    <input type="text" name="" id="output-amount" placeholder = "Result">
+      <!-- Result field - Hidden until result returned-->
 
+      <input type="text" class = "field" name="output" id="output" placeholder = "Result">
+
+    </section>
+    
     <h2 id="copyright">&copy;2020 &nbsp; | &nbsp; Casey Pitman</h2>
-
-
-
-
-
   </main>
 
   <script src="app.js"></script>
 </body>
 </html>
-
-
-
-
-<!-- <option value="">Convert from:</option>
-<option value="AUD">Austrailian Dollars</option> 
-<option value="GBP">British Pounds</option>
-<option value="CAD">Canadian Dollars</option>
-<option value="CNY">Chinese Yuan</option>
-<option value="DKK">Danish Kroner</option>
-<option value="EUR">Euros</option>
-<option value="HKD">Hong Kong Dollars</option>
-<option value="ILS">Israeli New Shekels</option>
-<option value="INR">Indian Rupees</option>
-<option value="ISK">Icelandic Krónur </option>
-<option value="JPY">Japanese Yen</option>
-<option value="MXN">Mexican Pesos</option>
-<option value="NZD">New Zealand Dollars</option>
-<option value="PLN">Polish Złotys</option>
-<option value="RUB">Russian Rubles</option>
-<option value="CHF">Swiss Francs</option>
-<option value="TRY">Turkish Liras</option> -->

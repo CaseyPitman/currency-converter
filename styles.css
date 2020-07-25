@@ -1,5 +1,11 @@
-
-
+* {
+    box-sizing: border-box;
+    margin:0px;
+    padding:0px;
+    font-size: 10px;
+    font-family: 'EB Garamond', serif;
+    
+}
 
 body{
     background: linear-gradient(
@@ -9,7 +15,103 @@ body{
     background-position:left;
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: 'EB Garamond', serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     min-height:100vh;
+    width:auto;
+    margin:auto;
+}
+
+#wrapper {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-flow:row wrap;
+    margin:auto;
+    width:90%;
+}
+
+#container {
+    width: 50%;
+    margin: 20px auto;
+}
+
+#headline {
+    color:rgb(245, 245, 245);
     width:100%;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.field, 
+#convert-btn {
+    border: none;
+    font-size:2rem;
+    background-color:whitesmoke;
+    width:100%;
+    margin: 5px auto;
+    padding:3px;
+}
+
+#convert-btn {
+    /* background-color: rgb(128, 128, 128, 0.7);  */
+    background-color: rgb(47, 79, 68, 0.75);
+    color:white;
+}
+
+#convert-btn:hover {
+    background-color: rgb(47, 79, 68);
+    font-weight: 600;
+}
+
+#output {
+    visibility: hidden;
+}
+
+#copyright {
+    color:rgb(245, 245, 245);
+    width: 100%;
+    text-align:center;
+    font-size: 1.8rem;
+}
+
+
+/* ********** Tablet Styles ********** */
+
+@media screen and (min-width: 768px){
+
+    #headline {
+        font-size: 4rem;
+    }
+
+    #container {
+        margin:25px auto;
+        width: 25%;
+    }
+
+    .field, 
+    #convert-btn {
+        margin:10px auto;
+    }
+
+    #copyright {
+        font-size: 20px;
+    }
+}
+
+/* ********* Tablet Landscape ***********/
+@media screen and (min-width: 768px) and (orientation: landscape){
+
+    #headline {
+        font-size: 5rem;
+    }
+
+    #container {
+        width: 22%;
+    }
+
+    #copyright {
+        font-size: 24px;
+    }
 }
