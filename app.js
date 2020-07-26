@@ -7,12 +7,31 @@ const dataControl = (() => {
 
 
     //Retrieve current exchange rates async/await try/catch
-    //     "https://api.ratesapi.io/api/latest?base=" + inputCurrency + "&symbols=" + outputCurrency
+    //     "https://api.ratesapi.io/api/latest?base=" + inputCurrency + "&symbols=" + outputCurrency"
+    return {
+        getRates: async (input, output) => {
+            try{
+                let response = await fetch(`https://api.ratesapi.io/api/latest?base=${input}&symbols=${output}`);
+                
+                let data = await response.json();
+                // let rate = data.rates[output];
 
-    //Make the conversion
+                return data;
+            } catch (error) {
+                alert('There seems to be a problem retrieving exchange rates. Please try again.')
+            }
+        }, 
 
-    //Return results
+        convert: () => {
+             //Make the conversion
+            //convert input to number
 
+            //Return results
+            return result;
+        }
+
+
+    }
 })();
 
 /* ********** UI ********** */
@@ -26,10 +45,18 @@ const uiControl = (() => {
         convertBtn: document.getElementById('convert-btn'),
         output: document.getElementById('output')
     }
-
+   
     return {  
         //Get inputs
+        getInputs: () => {
+            let inputs = {
+                amount: elements.inputAmount.value,
+                convertFrom: elements.inputCurrency.value,
+                convertTo: elements.outputCurrency.value
+            }
 
+            return inputs;
+        },
 
         //Display results
 
@@ -51,36 +78,80 @@ const uiControl = (() => {
 /* ********** Controller ********** */
 
 const controller = ((data, ui) => {
-
-    // Get DOMstrings
-    const el = ui.getElements();
-    console.log(el);
-
-
+    
     //Set up event listeners
+    const eventListeners = () => {
+        // Get DOMstrings
+        const el = ui.getElements();
+        // console.log(el);
+        //Click button
+        el.convertBtn.addEventListener('click', convert);
+
+        // el.convertBtn.addEventListener('keypress', (event) => {
+        //     if (event.keyCode === 13 || event.which === 13){
+        //         console.log('key');
+        //         convert();
+        //     }
+        // })
+    }
+     
+
+    const convert = () => {
+        //Retrieve inputs
+        let inputs = ui.getInputs();
+        console.log(inputs);
+
+        if (inputs.amount === ""){  //Amount left blank
+            alert('Please enter an amount to convert.');
+            return;
+        } else if (inputs.convertFrom === "selected"){  //Convert from left blank
+            alert ('Please the type of currency you wish to convert.');
+            return;
+        } else if (inputs.convertTo === "selected"){ //Convert to left blank
+            alert ('Please enter they type of currency you wish to convert to.');
+            return;
+        } else {
+            //Call for live exchange rates
+            let rate = data.getRates(inputs.convertFrom, inputs.convertTo);
+            
+            // Send to data to convert
+
+            // Display results
+        }
 
 
-    //Retrieve inputs
 
 
-    //Retrieve current exchange rates
+        //Retrieve current exchange rates
+        
+        //Convert the input to the desired currency 
+        
+        //Display the results
+    };
 
-
-    //Convert the input to the desired currency
-
-
-    //Display the results
 
 
     //return init function
-        //Hide results
+    return {
+        init: () => {
+            //Set up event listeners
+            eventListeners();
+
+            //Hide results
+        }
+
+
+    }
+        
+
+        
 
 
 })(dataControl, uiControl);
 
 /* Initialize App */
 
-//init();
+controller.init();
 
 /* 
 ************************TESTING AREA***********************
