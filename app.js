@@ -5,32 +5,29 @@
 
 const dataControl = (() => {
 
-
-    //Retrieve current exchange rates async/await try/catch
-    //     "https://api.ratesapi.io/api/latest?base=" + inputCurrency + "&symbols=" + outputCurrency"
     return {
-        getRates: async (input, output) => {
+
+        getRate: async (input, output) => {
             try{
                 let response = await fetch(`https://api.ratesapi.io/api/latest?base=${input}&symbols=${output}`);
                 
                 let data = await response.json();
-                // let rate = data.rates[output];
-
-                return data;
+                let rate = data.rates[output];
+               // console.log(rate);
+                return rate;
             } catch (error) {
                 alert('There seems to be a problem retrieving exchange rates. Please try again.')
             }
-        }, 
-
-        convert: () => {
-             //Make the conversion
-            //convert input to number
-
-            //Return results
             return result;
+        },
+        
+        convertMoney: (input, rate) => {
+            let output;
+            input = parseInt(input);
+            //Do the math
+            output = Math.round(input * rate * 100)/100;
+            return output;
         }
-
-
     }
 })();
 
@@ -43,8 +40,9 @@ const uiControl = (() => {
         inputCurrency: document.getElementById('input-currency'),
         outputCurrency: document.getElementById('output-currency'),
         convertBtn: document.getElementById('convert-btn'),
-        output: document.getElementById('output')
+        output: document.getElementById('output'),
     }
+
    
     return {  
         //Get inputs
@@ -52,16 +50,25 @@ const uiControl = (() => {
             let inputs = {
                 amount: elements.inputAmount.value,
                 convertFrom: elements.inputCurrency.value,
-                convertTo: elements.outputCurrency.value
+                convertTo: elements.outputCurrency.value,
+                currencyName: elements.outputCurrency.options[elements.outputCurrency.selectedIndex].text
             }
 
             return inputs;
         },
 
         //Display results
-
+        displayResult: (amount, currency) => {
+            elements.output.value = `${amount} ${currency}`;
+            elements.output.style.visibility = 'visible';
+            return;
+        },
 
         //Hide results
+        hideResults: () => { 
+            elements.output.style.visibility = 'hidden';
+            return;
+        },
 
 
         //Return Elements
@@ -78,6 +85,7 @@ const uiControl = (() => {
 /* ********** Controller ********** */
 
 const controller = ((data, ui) => {
+
     
     //Set up event listeners
     const eventListeners = () => {
@@ -93,13 +101,13 @@ const controller = ((data, ui) => {
         //         convert();
         //     }
         // })
-    }
+    };
      
 
-    const convert = () => {
+    const convert = async () => {
         //Retrieve inputs
         let inputs = ui.getInputs();
-        console.log(inputs);
+        let outptuCurrencyName = inputs.currencyName;
 
         if (inputs.amount === ""){  //Amount left blank
             alert('Please enter an amount to convert.');
@@ -111,22 +119,19 @@ const controller = ((data, ui) => {
             alert ('Please enter they type of currency you wish to convert to.');
             return;
         } else {
-            //Call for live exchange rates
-            let rate = data.getRates(inputs.convertFrom, inputs.convertTo);
-            
-            // Send to data to convert
+           //Get current rates
+            let rate = await data.getRate(inputs.convertFrom, inputs.convertTo);
+            //console.log('rate', rate);
+           //Convert money using amount and rate
+           let resultAmount = data.convertMoney(inputs.amount, rate);
+          // console.log(resultAmount);
 
-            // Display results
+           //Display results
+           ui.displayResult(resultAmount, outptuCurrencyName); 
         }
-
-
-
-
-        //Retrieve current exchange rates
         
-        //Convert the input to the desired currency 
-        
-        //Display the results
+     
+
     };
 
 
@@ -138,14 +143,12 @@ const controller = ((data, ui) => {
             eventListeners();
 
             //Hide results
+            ui.hideResults();
         }
 
 
     }
         
-
-        
-
 
 })(dataControl, uiControl);
 
