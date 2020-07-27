@@ -23,9 +23,12 @@ const dataControl = (() => {
         
         convertMoney: (input, rate) => {
             let output;
-            input = parseInt(input);
+            
+            input = parseFloat(input);
             //Do the math
-            output = Math.round(input * rate * 100)/100;
+            output = input * rate;
+            output = output.toFixed(2);
+            console.log('output from calculator', output)
             return output;
         }
     }
@@ -70,6 +73,24 @@ const uiControl = (() => {
             return;
         },
 
+        formatNumber: (num) => {
+            let numSplit, int, dec, newNum;
+            console.log('num', num);
+            numSplit = num.split('.');
+            console.log('here', numSplit)
+            int = numSplit[0];
+            dec = numSplit[1];
+
+            //Format numbers to include commas where appropriate - top out at billions in this case. 
+            if (int.length > 9){ 
+
+                int = `${int.substr(0, int.length - 9)},${int.substr(int.length - 9, 3)},${int.substr(int.length - 6, 3)},${int.substr(int.length - 3, 3)}`;
+            }
+
+            newNum = int + '.' + dec;
+            return newNum;
+        },
+
 
         //Return Elements
         getElements: () => {
@@ -94,19 +115,13 @@ const controller = ((data, ui) => {
         // console.log(el);
         //Click button
         el.convertBtn.addEventListener('click', convert);
-
-        // el.convertBtn.addEventListener('keypress', (event) => {
-        //     if (event.keyCode === 13 || event.which === 13){
-        //         console.log('key');
-        //         convert();
-        //     }
-        // })
     };
      
 
     const convert = async () => {
         //Retrieve inputs
         let inputs = ui.getInputs();
+        console.log(inputs.amount)
         let outptuCurrencyName = inputs.currencyName;
 
         if (inputs.amount === ""){  //Amount left blank
@@ -123,11 +138,13 @@ const controller = ((data, ui) => {
             let rate = await data.getRate(inputs.convertFrom, inputs.convertTo);
             //console.log('rate', rate);
            //Convert money using amount and rate
-           let resultAmount = data.convertMoney(inputs.amount, rate);
+            let resultAmount = data.convertMoney(inputs.amount, rate);
           // console.log(resultAmount);
-
+          //Format result number
+            let formatResult = ui.formatNumber(resultAmount);
+            console.log('Test', formatResult)
            //Display results
-           ui.displayResult(resultAmount, outptuCurrencyName); 
+           ui.displayResult(formatResult, outptuCurrencyName); 
         }
         
      
@@ -156,34 +173,3 @@ const controller = ((data, ui) => {
 
 controller.init();
 
-/* 
-************************TESTING AREA***********************
- */
-
-
-
-/*
-    function convert(){
-        let inputCurrency=$("#input-currency").val(); 
-        let outputCurrency=$("#output-currency").val();
-        let inputAmount=$("#input-amount").val();
-        let outputText=$("#output-currency option:selected").text();
-        //Call for current exchange rates
-        $.getJSON("https://api.ratesapi.io/api/latest?base=" + inputCurrency + "&symbols=" + outputCurrency, function(data){
-            if (inputCurrency===""){ //User doesn't choose input currency
-                alert("Please choose the type of currency you wish to convert from.");
-            }
-            if(inputAmount===""){ //User doesn't input an amount
-                alert("Plese enter an amount to convert.");
-            }
-            if(outputCurrency===""){ //User doesn't choose ouput currency
-                alert("Please enter the type of currency you with to convert to.");
-            }
-            //Does the math for the conversion. 
-            let results= (inputAmount * data.rates[outputCurrency]).toFixed(2);
-            //Displays the result
-            $("#output-amount").val(results + " " + outputText);       
-        })
-    }
-
-}); */
