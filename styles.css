@@ -1,9 +1,10 @@
 * {
-    box-sizing: border-box;
+    box-sizing: border-box;    
     margin:0px;
     padding:0px;
+
+    font-family: 'EB Garamond', serif; 
     font-size: 10px;
-    font-family: 'EB Garamond', serif;
 }
 
 body{
@@ -14,12 +15,14 @@ body{
     background-position:left;
     background-repeat: no-repeat;
     background-size: cover;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
+    margin:auto;
     min-height:100vh;
     width:auto;
-    margin:auto;
 }
 
 #wrapper {
@@ -27,31 +30,32 @@ body{
     justify-content:center;
     align-items:center;
     flex-flow:row wrap;
+
     margin:auto;
     width:90%;
 }
 
-#container {
-    width: 55%;
+#container { 
     margin: 20px auto;
+    width: 55%;
 }
 
 #headline {
     color:rgb(245, 245, 245);
-    width:100%;
-    text-align: center;
     font-size: 3rem;
+    text-align: center;
+    width:100%;
 }
 
 .field, 
 #convert-btn {
+    background-color:whitesmoke;
     border: none;
     font-size:1.8rem;
-    background-color:whitesmoke;
-    width:100%;
     margin: 10px auto;
     padding:3px;
     text-align:center;
+    width:100%;
 }
 
 #convert-btn {
@@ -65,12 +69,12 @@ body{
 }
 
 #results {
-    width: 90%;
-    margin: 0 auto;
     display:flex;
     justify-content: center;
     align-items: center;
 
+    margin: 0 auto;
+    width: 90%;
 }
 
 #output {
@@ -79,14 +83,14 @@ body{
 
 #copyright {
     color:rgb(245, 245, 245);
-    width: 100%;
-    text-align:center;
     font-size: 1.8rem;
     margin: 20px 0;
+    width: 100%;
+    text-align:center;
 }
 
 
-/* ********** Tablet Styles ********** */
+/* ********** Tablet / Desktop Styles ********** */
 
 @media screen and (min-width: 768px){
 
@@ -113,7 +117,9 @@ body{
     }
 }
 
+
 /* ********* Tablet Landscape ***********/
+
 @media screen and (min-width: 768px) and (orientation: landscape){
 
     #headline {

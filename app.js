@@ -6,31 +6,33 @@
 const dataControl = (() => {
 
     return {
-
+        //Make API call for live exchange rates.
         getRate: async (input, output) => {
             try{
                 let response = await fetch(`https://api.ratesapi.io/api/latest?base=${input}&symbols=${output}`);
-                
                 let data = await response.json();
                 let rate = data.rates[output];
                 return rate;
             } catch (error) {
-                alert('There seems to be a problem retrieving exchange rates. Please try again.')
-            }
-            return result;
+                alert('There seems to be a problem retrieving exchange rates. Please try again.');
+            }  
         },
         
+        //Convert from input currency to output currency
         convertMoney: (input, rate) => {
             let output;
-            
+
+            //Remove commas and change from string to number for math.
+            input = input.replace(/,/g, "");
             input = parseFloat(input);
+
             //Do the math
             output = input * rate;
-          
             return output;
         }
-    }
+    };
 })();
+
 
 /* ********** UI ********** */
 
@@ -42,11 +44,11 @@ const uiControl = (() => {
         outputCurrency: document.getElementById('output-currency'),
         convertBtn: document.getElementById('convert-btn'),
         output: document.getElementById('output'),
-    }
+    };
 
    
     return {  
-        //Get inputs
+        //Get inputs from DOM
         getInputs: () => {
             let inputs = {
                 amount: elements.inputAmount.value,
@@ -57,27 +59,28 @@ const uiControl = (() => {
             return inputs;
         },
 
-        //Display results
-        displayResult: (amount, currency) => {
-            elements.output.value = `${amount.toFixed(2)} ${currency}`;
-            elements.output.style.visibility = 'visible';
-            return;
-        },
-
-        //Hide results
-        hideResults: () => { 
-            elements.output.style.visibility = 'hidden';
-            return;
-        },
-
         //Format numbers to include commas in proper place
         formatNumber: (num) => {
             let newNum = new Intl.NumberFormat().format(num);
             return newNum;
         },
 
+        //Display results
+        displayResult: (amount, currency) => {
+            amount = amount.toFixed(2);
+            amount = uiControl.formatNumber(amount);
+            elements.output.value = `${amount} ${currency}`;
+            elements.output.style.visibility = 'visible';
+            return;
+        },
 
-        //Return Elements
+        //Hide results on init
+        hideResults: () => { 
+            elements.output.style.visibility = 'hidden';
+            return;
+        },
+
+        //Return elements
         getElements: () => {
             return elements;
         }
@@ -95,13 +98,14 @@ const controller = ((data, ui) => {
     //Set up event listeners
     const eventListeners = () => {
 
-        //Click button
+        //Click convert button
         el.convertBtn.addEventListener('click', convert);
 
         //Event listener for input amount formatting
         el.inputAmount.addEventListener('keyup', formatInput);
     };
      
+    //Update format of input numbers in real time. 
     const formatInput = () => {
         let input = el.inputAmount.value;
         if (input[input.length - 1] !== '.'){
@@ -112,9 +116,11 @@ const controller = ((data, ui) => {
             //Replace with formatted number
             el.inputAmount.value = formatInput;
         }
-    }
+    };
 
     const convert = async () => {
+        let result;
+
         //Retrieve inputs
         let inputs = ui.getInputs();
         let outptuCurrencyName = inputs.currencyName;
@@ -132,17 +138,12 @@ const controller = ((data, ui) => {
            //Get current rates
             let rate = await data.getRate(inputs.convertFrom, inputs.convertTo);
     
-           //Convert money using amount and rate
-            let resultAmount = data.convertMoney(inputs.amount, rate);
-     
-          //Format result number
-            let formatResult = ui.formatNumber(resultAmount);
-            formatResult = parseFloat(formatResult);
-
+            //Convert money using amount and rate
+            let result = data.convertMoney(inputs.amount, rate);
+           
            //Display results
-           ui.displayResult(formatResult, outptuCurrencyName); 
+           ui.displayResult(result, outptuCurrencyName); 
         }
-        
     };
 
 
@@ -163,7 +164,6 @@ const controller = ((data, ui) => {
 
 })(dataControl, uiControl);
 
+
 /* Initialize App */
-
 controller.init();
-
