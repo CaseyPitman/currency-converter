@@ -146,9 +146,6 @@ const controller = ((data, ui) => {
         }
     };
 
-
-
-    //return init function
     return {
         init: () => {
             //Set up event listeners
@@ -157,11 +154,7 @@ const controller = ((data, ui) => {
             //Hide results
             ui.hideResults();
         }
-
-
     }
-        
-
 })(dataControl, uiControl);
 
 
